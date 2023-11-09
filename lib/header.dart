@@ -8,7 +8,8 @@ class Header extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: const Color.fromARGB(255, 231, 209, 209),
+      scrolledUnderElevation: 0,
+      backgroundColor: const Color.fromARGB(255, 255, 255, 255),
       flexibleSpace: const Padding(
         padding: EdgeInsets.all(8.0),
         child: Column(
