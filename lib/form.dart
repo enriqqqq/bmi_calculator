@@ -124,6 +124,10 @@ class _FormState extends State<FormApp> {
   }
 
   void submit() {
+    if (weightFocusNode.hasFocus || heightFocusNode.hasFocus) {
+      return;
+    }
+
     final double bmi;
     try {
       final heightInMeter = height / 100;
