@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class GenderCard extends StatelessWidget {
   final String value;
@@ -21,15 +22,16 @@ class GenderCard extends StatelessWidget {
         border: selected
             ? Border.all(
                 width: 2,
-                color: Colors.black,
+                color: const Color.fromARGB(255, 214, 214, 214),
               )
             : null,
         borderRadius: BorderRadius.circular(10),
         color: selected
-            ? const Color.fromARGB(255, 220, 222, 223)
+            ? const Color.fromARGB(255, 243, 243, 243)
             : const Color.fromARGB(255, 255, 255, 255),
       ),
-      padding: const EdgeInsets.all(20.0),
+      padding: const EdgeInsets.only(
+          top: 40.0, left: 40.0, right: 40.0, bottom: 40.0),
       child: Column(
         children: [
           InkWell(
@@ -41,11 +43,15 @@ class GenderCard extends StatelessWidget {
             ),
           ),
           selected
-              ? Padding(
-                  padding: const EdgeInsets.only(top: 10.0),
+              ? Container(
+                  margin: const EdgeInsets.only(top: 25.0),
                   child: Text(
                     value,
-                    style: const TextStyle(fontSize: 18),
+                    style: GoogleFonts.poppins(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: const Color.fromARGB(255, 54, 54, 54),
+                    ),
                   ),
                 )
               : Container(),

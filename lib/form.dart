@@ -3,6 +3,7 @@ import 'gender_section.dart';
 import 'height_section.dart';
 import 'weight_section.dart';
 import 'result.dart';
+import 'button.dart';
 
 class FormApp extends StatefulWidget {
   const FormApp({super.key});
@@ -13,12 +14,31 @@ class FormApp extends StatefulWidget {
 
 class _FormState extends State<FormApp> {
   var gender = 'Male';
-  double height = 165.0;
-  double weight = 50.0;
+  double height = 165;
+  double weight = 50;
   double weightIncrement = 1.0;
 
   final heightController = TextEditingController();
   final weightController = TextEditingController();
+
+  final heightFocusNode = FocusNode();
+  final weightFocusNode = FocusNode();
+
+  @override
+  void initState() {
+    super.initState();
+    heightFocusNode.addListener(() {
+      if (!heightFocusNode.hasFocus) {
+        onHeightTextChange();
+      }
+    });
+
+    weightFocusNode.addListener(() {
+      if (!weightFocusNode.hasFocus) {
+        onWeightTextChange();
+      }
+    });
+  }
 
   void setGender(clickedGender) {
     setState(() {
@@ -26,15 +46,15 @@ class _FormState extends State<FormApp> {
     });
   }
 
-  void onHeightTextChange(value) {
+  void onHeightTextChange() {
     double newValue;
     try {
-      newValue = double.parse(value);
+      newValue = double.parse(heightController.text);
     } catch (err) {
       newValue = 1.0;
     }
     if (newValue > 260) {
-      newValue = 260;
+      newValue = 260.0;
     }
     if (newValue < 1 || newValue.isNaN) {
       newValue = 1.0;
@@ -53,10 +73,10 @@ class _FormState extends State<FormApp> {
     });
   }
 
-  void onWeightTextChange(value) {
+  void onWeightTextChange() {
     double newValue;
     try {
-      newValue = double.parse(value);
+      newValue = double.parse(weightController.text);
     } catch (err) {
       newValue = 1.0;
     }
@@ -65,7 +85,7 @@ class _FormState extends State<FormApp> {
       newValue = 1.0;
     }
 
-    weightController.text = newValue.toStringAsFixed(1);
+    weightController.text = newValue.toString();
     setState(() {
       weight = newValue;
     });
@@ -90,6 +110,12 @@ class _FormState extends State<FormApp> {
     weightController.text = newWeight.toStringAsFixed(1);
     setState(() {
       weight = newWeight;
+    });
+  }
+
+  void setIncrement(value) {
+    setState(() {
+      weightIncrement = value;
     });
   }
 
@@ -162,37 +188,25 @@ class _FormState extends State<FormApp> {
             ),
             HeightSection(
               height: height,
+              focusNode: heightFocusNode,
               heightController: heightController,
               onHeightTextChange: onHeightTextChange,
               onHeightSliderChange: onHeightSliderChange,
             ),
             WeightSection(
               weight: weight,
+              focusNode: weightFocusNode,
               weightController: weightController,
               onWeightTextChange: onWeightTextChange,
               onWeightAdd: onWeightAdd,
               onWeightSubtract: onWeightSubtract,
+              increment: weightIncrement,
+              setIncrement: setIncrement,
             ),
-            TextButton(
+            Button(
+              text: 'Calculate',
               onPressed: submit,
-              child: Container(
-                margin: const EdgeInsets.only(bottom: 20.0),
-                padding: const EdgeInsets.only(
-                  top: 10.0,
-                  bottom: 10.0,
-                  left: 30.0,
-                  right: 30.0,
-                ),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  color: Colors.blue,
-                ),
-                child: const Text(
-                  'Calculate',
-                  style: TextStyle(fontSize: 18, color: Colors.white),
-                ),
-              ),
-            ),
+            )
           ],
         ),
       ),
