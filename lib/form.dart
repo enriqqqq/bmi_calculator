@@ -64,6 +64,8 @@ class _FormState extends State<FormApp> {
     setState(() {
       height = newValue;
     });
+
+    heightFocusNode.unfocus();
   }
 
   void onHeightSliderChange(value) {
@@ -89,6 +91,8 @@ class _FormState extends State<FormApp> {
     setState(() {
       weight = newValue;
     });
+
+    weightFocusNode.unfocus();
   }
 
   void onWeightAdd() {
@@ -134,30 +138,36 @@ class _FormState extends State<FormApp> {
     if (gender == 'Male') {
       if (bmi < 18) {
         bmiClass = 'Underweight';
-        bmiDescription = 'You are underweight. You need to eat more.';
+        bmiDescription =
+            'You are underweight. Remember that nourishing your body is crucial. Make sure to eat more!';
       } else if (bmi >= 18 && bmi < 25) {
         bmiClass = 'Normal';
-        bmiDescription = 'You are normal. Good job!';
+        bmiDescription = 'You are have a normal BMI. Good job and keep it up!';
       } else if (bmi >= 25 && bmi <= 27) {
         bmiClass = 'Overweight';
-        bmiDescription = 'You are overweight. You need to exercise more.';
+        bmiDescription =
+            'It seems like you are overweight. You need to exercise.';
       } else {
         bmiClass = 'Obese';
-        bmiDescription = 'You are obese. You need to exercise more.';
+        bmiDescription =
+            'Oh no! You are obese. Don\'t lose hope yet! You need to exercise more and keep a healthy diet.';
       }
     } else {
       if (bmi < 17) {
         bmiClass = 'Underweight';
-        bmiDescription = 'You are underweight. You need to eat more.';
+        bmiDescription =
+            'You are underweight. Remember that nourishing your body is crucial. Make sure to eat more!';
       } else if (bmi >= 17 && bmi < 23) {
         bmiClass = 'Normal';
-        bmiDescription = 'You are normal. Good job!';
+        bmiDescription = 'You are have a normal BMI. Good job and keep it up!';
       } else if (bmi >= 23 && bmi <= 27) {
         bmiClass = 'Overweight';
-        bmiDescription = 'You are overweight. You need to exercise more.';
+        bmiDescription =
+            'It seems like you are overweight. You need to exercise.';
       } else {
         bmiClass = 'Obese';
-        bmiDescription = 'You are obese. You need to exercise more.';
+        bmiDescription =
+            'Oh no! You are obese. Don\'t lose hope yet! You need to exercise more and keep a healthy diet.';
       }
     }
 

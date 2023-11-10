@@ -20,7 +20,7 @@ class Result extends StatelessWidget {
     final Color textColor;
     final String imgPath;
     if (bmiClass == 'Underweight') {
-      textColor = const Color.fromARGB(255, 235, 218, 66);
+      textColor = const Color.fromARGB(255, 250, 232, 70);
       imgPath = 'assets/images/eating.jpg';
     } else if (bmiClass == 'Normal') {
       textColor = const Color.fromARGB(255, 70, 148, 73);
@@ -32,6 +32,8 @@ class Result extends StatelessWidget {
       textColor = const Color.fromARGB(255, 158, 33, 24);
       imgPath = 'assets/images/gym.jpg';
     }
+
+    var screenWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
         appBar: const Header(),
@@ -92,10 +94,14 @@ class Result extends StatelessWidget {
                       color: textColor,
                     ),
                   ),
-                  Text(
-                    bmiDescription,
-                    style: GoogleFonts.poppins(
-                      fontSize: 16,
+                  SizedBox(
+                    width: screenWidth < 600 ? 250 : 500,
+                    child: Text(
+                      bmiDescription,
+                      style: GoogleFonts.poppins(
+                        fontSize: 16,
+                      ),
+                      textAlign: TextAlign.center,
                     ),
                   ),
                   Button(

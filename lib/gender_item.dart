@@ -17,6 +17,8 @@ class GenderCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var screenWidth = MediaQuery.of(context).size.width;
+
     return Container(
       decoration: BoxDecoration(
         border: selected
@@ -30,15 +32,16 @@ class GenderCard extends StatelessWidget {
             ? const Color.fromARGB(255, 243, 243, 243)
             : const Color.fromARGB(255, 255, 255, 255),
       ),
-      padding: const EdgeInsets.only(
-          top: 40.0, left: 40.0, right: 40.0, bottom: 40.0),
+      padding: screenWidth < 600
+          ? const EdgeInsets.all(35.0)
+          : const EdgeInsets.all(40.0),
       child: Column(
         children: [
           InkWell(
             onTap: () => tapHandler(value),
             child: Image.asset(
               imgUrl,
-              width: 100,
+              width: screenWidth < 600 ? 80 : 100,
               height: 100,
             ),
           ),
